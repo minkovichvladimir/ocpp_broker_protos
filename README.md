@@ -44,13 +44,13 @@ make proto
 
 1. Добавьте зависимость в go.mod:
 ```go
-require github.com/vladimirminkovich/rtk_volt/ocpp_broker_protos v0.0.0
-replace github.com/vladimirminkovich/rtk_volt/ocpp_broker_protos => ../ocpp_broker_protos
+require github.com/minkovichvladimir/ocpp_broker_protos v0.0.0
+replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 ```
 
 2. Импортируйте сгенерированный код:
 ```go
-import pb "github.com/vladimirminkovich/rtk_volt/ocpp_broker_protos/proto"
+import pb "github.com/minkovichvladimir/ocpp_broker_protos/proto"
 ```
 
 ## API
