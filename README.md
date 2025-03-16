@@ -7,9 +7,12 @@
 ```
 ocpp_broker_protos/
 ├── proto/
-│   ├── ocpp.proto         # Определения протокола
-│   ├── ocpp.pb.go         # Сгенерированный код для сообщений
-│   └── ocpp_grpc.pb.go    # Сгенерированный код для gRPC сервиса
+│   └── ocpp.proto         # Определения протокола
+├── gen/
+│   └── go/
+│       └── proto/
+│           ├── ocpp.pb.go         # Сгенерированный код для сообщений
+│           └── ocpp_grpc.pb.go    # Сгенерированный код для gRPC сервиса
 ├── Makefile
 ├── go.mod
 └── README.md
@@ -50,7 +53,7 @@ replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 
 2. Импортируйте сгенерированный код:
 ```go
-import pb "github.com/minkovichvladimir/ocpp_broker_protos/proto"
+import pb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/proto"
 ```
 
 ## API
@@ -80,5 +83,5 @@ service OCPPService {
 При внесении изменений в proto файлы:
 
 1. Измените файлы в директории `proto/`
-2. Запустите `make proto` для регенерации кода
+2. Запустите `make proto` для регенерации кода (файлы будут сгенерированы в `gen/go/proto/`)
 3. Обновите зависимости в сервисах, использующих этот модуль 
