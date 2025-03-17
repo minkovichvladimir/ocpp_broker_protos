@@ -3,9 +3,10 @@
 all: proto
 
 clean:
-	rm -rf gen/go/proto/*.pb.go
+	rm -rf gen/go/ocpp/v1/*.pb.go
+	rm -rf gen/go/mapping/v1/*.pb.go
 
-proto:
-	protoc --go_out=./gen/go --go_opt=paths=source_relative \
-		--go-grpc_out=./gen/go --go-grpc_opt=paths=source_relative \
-		proto/ocpp.proto 
+generate:
+	@echo "Generating files..."
+	protoc -I proto proto/ocpp/v1/ocpp.proto --go_out=./gen/go --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+	protoc -I proto proto/mapping/v1/mapping.proto --go_out=./gen/go --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
