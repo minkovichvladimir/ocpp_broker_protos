@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package mapping;
+
+option go_package = "ocpp_broker_protos.mapping.v1;mappingv1";
+
+// Сервис для управления маппингами станций
+service MappingService {
+  // Получить все маппинги
+  rpc GetAllMappings(GetAllMappingsRequest) returns (GetAllMappingsResponse) {}
+  
+  // Создать новый маппинг
+  rpc CreateMapping(CreateMappingRequest) returns (CreateMappingResponse) {}
+  
+  // Обновить существующий маппинг
+  rpc UpdateMapping(UpdateMappingRequest) returns (UpdateMappingResponse) {}
+  
+  // Удалить маппинг
+  rpc DeleteMapping(DeleteMappingRequest) returns (DeleteMappingResponse) {}
+}
+
+// Запрос на получение всех маппингов
+message GetAllMappingsRequest {}
+
+// Ответ с маппингами
+message GetAllMappingsResponse {
+  repeated Mapping mappings = 1;
+}
+
+// Маппинг станции на центральную систему
+message Mapping {
+  string station_id = 1;
+  int32 central_system_id = 2;
+  int32 weight = 3;
+  bool is_master = 4;
+  bool is_enabled = 5;
+}
+
+// Запрос на создание маппинга
+message CreateMappingRequest {
+  string station_id = 1;
+  int32 central_system_id = 2;
+  int32 weight = 3;
+  bool is_master = 4;
+  bool is_enabled = 5;
+}
+
+// Ответ на создание маппинга
+message CreateMappingResponse {
+  bool success = 1;
+}
+
+// Запрос на обновление маппинга
+message UpdateMappingRequest {
+  string station_id = 1;
+  int32 central_system_id = 2;
+  int32 weight = 3;
+  bool is_master = 4;
+  bool is_enabled = 5;
+}
+
+// Ответ на обновление маппинга
+message UpdateMappingResponse {
+  bool success = 1;
+}
+
+// Запрос на удаление маппинга
+message DeleteMappingRequest {
+  string station_id = 1;
+  int32 central_system_id = 2;
+}
+
+// Ответ на удаление маппинга
+message DeleteMappingResponse {
+  bool success = 1;
+} 

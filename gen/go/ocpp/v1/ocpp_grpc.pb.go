@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: proto/ocpp.proto
+// source: ocpp/v1/ocpp.proto
 
-package proto
+package ocppv1
 
 import (
 	context "context"
@@ -117,5 +117,5 @@ var OCPPService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/ocpp.proto",
+	Metadata: "ocpp/v1/ocpp.proto",
 }

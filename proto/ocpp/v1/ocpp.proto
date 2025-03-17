@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package ocpp;
 
-option go_package = "github.com/minkovichvladimir/ocpp_broker_protos/proto";
+option go_package = "ocpp_broker_protos.ocpp.v1;ocppv1";
 
 service OCPPService {
   rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
