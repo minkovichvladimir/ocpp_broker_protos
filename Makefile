@@ -3,7 +3,7 @@
 all: proto
 
 clean:
-	rm -rf gen/go/*.pb.go
+	rm -rf gen/go/proto/*.pb.go
 
 proto:
 	protoc --go_out=./gen/go --go_opt=paths=source_relative \
