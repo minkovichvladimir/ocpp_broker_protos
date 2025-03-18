@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package ocpp_broker.central_system.v1;
+
+option go_package = "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/ocpp_broker/central_system/v1;central_system_v1";
+
+// Сервис для управления центральными системами
+service CentralSystemService {
+  // Создает новую центральную систему
+  rpc CreateCentralSystem(CreateCentralSystemRequest) returns (CreateCentralSystemResponse) {}
+  
+  // Получает центральную систему по ID
+  rpc GetCentralSystem(GetCentralSystemRequest) returns (GetCentralSystemResponse) {}
+  
+  // Получает список всех центральных систем
+  rpc ListCentralSystems(ListCentralSystemsRequest) returns (ListCentralSystemsResponse) {}
+  
+  // Обновляет центральную систему
+  rpc UpdateCentralSystem(UpdateCentralSystemRequest) returns (UpdateCentralSystemResponse) {}
+  
+  // Удаляет центральную систему
+  rpc DeleteCentralSystem(DeleteCentralSystemRequest) returns (DeleteCentralSystemResponse) {}
+}
+
+// Центральная система
+message CentralSystem {
+  int32 id = 1;
+  string name = 2;
+  string websocket_url = 3;
+  string created_at = 4;
+  string updated_at = 5;
+}
+
+// Запрос на создание центральной системы
+message CreateCentralSystemRequest {
+  string name = 1;
+  string websocket_url = 2;
+}
+
+// Ответ на создание центральной системы
+message CreateCentralSystemResponse {
+  CentralSystem central_system = 1;
+}
+
+// Запрос на получение центральной системы
+message GetCentralSystemRequest {
+  int32 id = 1;
+}
+
+// Ответ на получение центральной системы
+message GetCentralSystemResponse {
+  CentralSystem central_system = 1;
+}
+
+// Запрос на получение списка центральных систем
+message ListCentralSystemsRequest {}
+
+// Ответ на получение списка центральных систем
+message ListCentralSystemsResponse {
+  repeated CentralSystem central_systems = 1;
+}
+
+// Запрос на обновление центральной системы
+message UpdateCentralSystemRequest {
+  int32 id = 1;
+  string name = 2;
+  string websocket_url = 3;
+}
+
+// Ответ на обновление центральной системы
+message UpdateCentralSystemResponse {
+  CentralSystem central_system = 1;
+}
+
+// Запрос на удаление центральной системы
+message DeleteCentralSystemRequest {
+  int32 id = 1;
+}
+
+// Ответ на удаление центральной системы
+message DeleteCentralSystemResponse {} 
