@@ -10,19 +10,26 @@ ocpp_broker_protos/
 │   ├── ocpp/
 │   │   └── v1/
 │   │       └── ocpp.proto         # Определения протокола OCPP
-│   └── mapping/
+│   ├── mapping/
+│   │   └── v1/
+│   │       └── mapping.proto      # Определения протокола для маппингов
+│   └── central_system/
 │       └── v1/
-│           └── mapping.proto      # Определения протокола для маппингов
+│           └── central_system.proto # Определения протокола для центральных систем
 ├── gen/
 │   └── go/
 │       ├── ocpp/
 │       │   └── v1/
 │       │       ├── ocpp.pb.go         # Сгенерированный код для OCPP сообщений
 │       │       └── ocpp_grpc.pb.go    # Сгенерированный код для OCPP gRPC сервиса
-│       └── mapping/
+│       ├── mapping/
+│       │   └── v1/
+│       │       ├── mapping.pb.go      # Сгенерированный код для маппингов
+│       │       └── mapping_grpc.pb.go # Сгенерированный код для сервиса маппингов
+│       └── central_system/
 │           └── v1/
-│               ├── mapping.pb.go      # Сгенерированный код для маппингов
-│               └── mapping_grpc.pb.go # Сгенерированный код для сервиса маппингов
+│               ├── central_system.pb.go      # Сгенерированный код для центральных станций
+│               └── central_system_grpc.pb.go # Сгенерированный код для сервиса центральных станций
 ├── Makefile
 ├── go.mod
 └── README.md
@@ -66,6 +73,7 @@ replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 import (
     ocpppb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/ocpp/v1"
     mappingpb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/mapping/v1"
+    centralpb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/central_system/v1"
 )
 ```
 
