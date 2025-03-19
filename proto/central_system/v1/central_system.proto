@@ -27,14 +27,16 @@ message CentralSystem {
   int32 id = 1;
   string name = 2;
   string websocket_url = 3;
-  string created_at = 4;
-  string updated_at = 5;
+  string description = 4;
+  string created_at = 5;
+  string updated_at = 6;
 }
 
 // Запрос на создание центральной системы
 message CreateCentralSystemRequest {
   string name = 1;
   string websocket_url = 2;
+  string description = 3;
 }
 
 // Ответ на создание центральной системы
@@ -65,6 +67,7 @@ message UpdateCentralSystemRequest {
   int32 id = 1;
   string name = 2;
   string websocket_url = 3;
+  string description = 4;
 }
 
 // Ответ на обновление центральной системы
