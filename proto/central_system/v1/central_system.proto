@@ -28,8 +28,6 @@ message CentralSystem {
   string name = 2;
   string websocket_url = 3;
   string description = 4;
-  string created_at = 5;
-  string updated_at = 6;
 }
 
 // Запрос на создание центральной системы
