@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ocpp;
+package ocpptc;
 
 option go_package = "ocpp_broker_protos.ocpptc.v1;ocpptcv1";
 

@@ -2,38 +2,7 @@
 
 Этот модуль содержит определения Protocol Buffers и сгенерированный код для gRPC сервисов, используемых в проекте OCPP Broker.
 
-## Структура проекта
 
-```
-ocpp_broker_protos/
-├── proto/
-│   ├── ocpp/
-│   │   └── v1/
-│   │       └── ocpp.proto         # Определения протокола OCPP
-│   ├── mapping/
-│   │   └── v1/
-│   │       └── mapping.proto      # Определения протокола для маппингов
-│   └── central_system/
-│       └── v1/
-│           └── central_system.proto # Определения протокола для центральных систем
-├── gen/
-│   └── go/
-│       ├── ocpp/
-│       │   └── v1/
-│       │       ├── ocpp.pb.go         # Сгенерированный код для OCPP сообщений
-│       │       └── ocpp_grpc.pb.go    # Сгенерированный код для OCPP gRPC сервиса
-│       ├── mapping/
-│       │   └── v1/
-│       │       ├── mapping.pb.go      # Сгенерированный код для маппингов
-│       │       └── mapping_grpc.pb.go # Сгенерированный код для сервиса маппингов
-│       └── central_system/
-│           └── v1/
-│               ├── central_system.pb.go      # Сгенерированный код для центральных станций
-│               └── central_system_grpc.pb.go # Сгенерированный код для сервиса центральных станций
-├── Makefile
-├── go.mod
-└── README.md
-```
 
 ## Требования
 
@@ -71,20 +40,21 @@ replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 2. Импортируйте сгенерированный код:
 ```go
 import (
-    ocpppb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/ocpp/v1"
-    mappingpb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/mapping/v1"
-    centralpb "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/central_system/v1"
+    ocpptspb "ocpp_broker_protos.ocppts.v1"
+    ocpptcpb "ocpp_broker_protos.ocpptc.v1"
+    centralpb "ocpp_broker_protos.central_system.v1"
+    mappingpb "ocpp_broker_protos.mapping.v1"
 )
 ```
 
 ## API
 
-### OCPPService
+### OCPPToStationService
 
-Сервис для обмена OCPP сообщениями:
+Сервис для проксирования OCPP сообщений от центральной системы к станции:
 
 ```protobuf
-service OCPPService {
+service OCPPToStationService {
   rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
 }
 ```
@@ -94,10 +64,56 @@ service OCPPService {
 - OCPPMessageRequest:
   - station_id (string): Идентификатор зарядной станции
   - message (bytes): Тело OCPP сообщения
-  - message_type (string): Тип OCPP сообщения
+  - request_id (string): ID запроса для трейсинга
 
 - OCPPMessageResponse:
   - success (bool): Статус обработки сообщения
+  - message (bytes): Ответное сообщение
+  - request_id (string): ID запроса для трейсинга
+
+### OCPPToCentralService
+
+Сервис для проксирования OCPP сообщений от станции к центральной системе:
+
+```protobuf
+service OCPPToCentralService {
+  rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
+}
+```
+
+#### Сообщения
+
+- OCPPMessageRequest:
+  - central_system_id (string): Идентификатор центральной системы
+  - message (bytes): Тело OCPP сообщения
+  - request_id (string): ID запроса для трейсинга
+
+- OCPPMessageResponse:
+  - success (bool): Статус обработки сообщения
+  - message (bytes): Ответное сообщение
+  - request_id (string): ID запроса для трейсинга
+
+### CentralSystemService
+
+Сервис для взаимодействия с центральными системами:
+
+```protobuf
+service CentralSystemService {
+  rpc SendMessage (MessageRequest) returns (MessageResponse) {}
+}
+```
+
+#### Сообщения
+
+- MessageRequest:
+  - central_system_id (string): Идентификатор центральной системы
+  - message (bytes): Тело сообщения
+  - request_id (string): ID запроса для трейсинга
+
+- MessageResponse:
+  - success (bool): Статус обработки сообщения
+  - message (bytes): Ответное сообщение
+  - request_id (string): ID запроса для трейсинга
 
 ### MappingService
 

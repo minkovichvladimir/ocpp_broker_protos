@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: central_system/v1/central_system.proto
 
-package central_system_v1
+package cs_v1
 
 import (
 	context "context"
@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CentralSystemService_CreateCentralSystem_FullMethodName = "/ocpp_broker.central_system.v1.CentralSystemService/CreateCentralSystem"
-	CentralSystemService_GetCentralSystem_FullMethodName    = "/ocpp_broker.central_system.v1.CentralSystemService/GetCentralSystem"
-	CentralSystemService_ListCentralSystems_FullMethodName  = "/ocpp_broker.central_system.v1.CentralSystemService/ListCentralSystems"
-	CentralSystemService_UpdateCentralSystem_FullMethodName = "/ocpp_broker.central_system.v1.CentralSystemService/UpdateCentralSystem"
-	CentralSystemService_DeleteCentralSystem_FullMethodName = "/ocpp_broker.central_system.v1.CentralSystemService/DeleteCentralSystem"
+	CentralSystemService_CreateCentralSystem_FullMethodName = "/cs.CentralSystemService/CreateCentralSystem"
+	CentralSystemService_GetCentralSystem_FullMethodName    = "/cs.CentralSystemService/GetCentralSystem"
+	CentralSystemService_ListCentralSystems_FullMethodName  = "/cs.CentralSystemService/ListCentralSystems"
+	CentralSystemService_UpdateCentralSystem_FullMethodName = "/cs.CentralSystemService/UpdateCentralSystem"
+	CentralSystemService_DeleteCentralSystem_FullMethodName = "/cs.CentralSystemService/DeleteCentralSystem"
 )
 
 // CentralSystemServiceClient is the client API for CentralSystemService service.
@@ -258,7 +258,7 @@ func _CentralSystemService_DeleteCentralSystem_Handler(srv interface{}, ctx cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CentralSystemService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ocpp_broker.central_system.v1.CentralSystemService",
+	ServiceName: "cs.CentralSystemService",
 	HandlerType: (*CentralSystemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

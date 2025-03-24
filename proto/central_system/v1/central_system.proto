@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package ocpp_broker.central_system.v1;
+package cs;
 
-option go_package = "github.com/minkovichvladimir/ocpp_broker_protos/gen/go/ocpp_broker/central_system/v1;central_system_v1";
+option go_package = "ocpp_broker_protos.central_system.v1;cs_v1";
 
 // Сервис для управления центральными системами
 service CentralSystemService {

@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OCPPToStationService_SendOCPPMessage_FullMethodName = "/ocpp.OCPPToStationService/SendOCPPMessage"
+	OCPPToStationService_SendOCPPMessage_FullMethodName = "/ocppts.OCPPToStationService/SendOCPPMessage"
 )
 
 // OCPPToStationServiceClient is the client API for OCPPToStationService service.
@@ -108,7 +108,7 @@ func _OCPPToStationService_SendOCPPMessage_Handler(srv interface{}, ctx context.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OCPPToStationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ocpp.OCPPToStationService",
+	ServiceName: "ocppts.OCPPToStationService",
 	HandlerType: (*OCPPToStationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
