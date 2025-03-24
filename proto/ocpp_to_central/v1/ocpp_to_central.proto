@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package ocpp;
+
+option go_package = "ocpp_broker_protos.ocpptc.v1;ocpptcv1";
+
+service OCPPToCentralService {
+  rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
+}
+
+message OCPPMessageRequest {
+  string station_id = 1;
+  bytes message = 2;
+  string message_type = 3;
+  string request_id = 4;
+}
+
+message OCPPMessageResponse {
+  bool success = 1;
+  bytes message = 2;
+  string request_id = 3;
+} 

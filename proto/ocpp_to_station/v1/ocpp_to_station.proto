@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package ocpp;
 
-option go_package = "ocpp_broker_protos.ocpp.v1;ocppv1";
+option go_package = "ocpp_broker_protos.ocppts.v1;ocpptsv1";
 
-service OCPPService {
+service OCPPToStationService {
   rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
 }
 
