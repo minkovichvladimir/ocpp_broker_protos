@@ -40,58 +40,12 @@ replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 2. Импортируйте сгенерированный код:
 ```go
 import (
-    ocpptspb "ocpp_broker_protos.ocppts.v1"
-    ocpptcpb "ocpp_broker_protos.ocpptc.v1"
     centralpb "ocpp_broker_protos.central_system.v1"
     mappingpb "ocpp_broker_protos.mapping.v1"
 )
 ```
 
 ## API
-
-### OCPPToStationService
-
-Сервис для проксирования OCPP сообщений от центральной системы к станции:
-
-```protobuf
-service OCPPToStationService {
-  rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
-}
-```
-
-#### Сообщения
-
-- OCPPMessageRequest:
-  - station_id (string): Идентификатор зарядной станции
-  - message (bytes): Тело OCPP сообщения
-  - request_id (string): ID запроса для трейсинга
-
-- OCPPMessageResponse:
-  - success (bool): Статус обработки сообщения
-  - message (bytes): Ответное сообщение
-  - request_id (string): ID запроса для трейсинга
-
-### OCPPToCentralService
-
-Сервис для проксирования OCPP сообщений от станции к центральной системе:
-
-```protobuf
-service OCPPToCentralService {
-  rpc SendOCPPMessage (OCPPMessageRequest) returns (OCPPMessageResponse) {}
-}
-```
-
-#### Сообщения
-
-- OCPPMessageRequest:
-  - central_system_id (string): Идентификатор центральной системы
-  - message (bytes): Тело OCPP сообщения
-  - request_id (string): ID запроса для трейсинга
-
-- OCPPMessageResponse:
-  - success (bool): Статус обработки сообщения
-  - message (bytes): Ответное сообщение
-  - request_id (string): ID запроса для трейсинга
 
 ### CentralSystemService
 
