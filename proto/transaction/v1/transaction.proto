@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package transaction;
+
+option go_package = "ocpp_broker_protos.transaction.v1;transactionv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Сервис для управления транзакциями зарядных станций
+service TransactionService {
+  // Получить все транзакции
+  rpc GetAllTransactions(GetAllTransactionsRequest) returns (GetAllTransactionsResponse) {}
+}
+
+// Сообщение Transaction представляет транзакцию зарядной станции
+message Transaction {
+  string id = 1;                                 // PRIMARY KEY
+  string station_id = 2;                         // NOT NULL
+  string connector_id = 3;                       // NOT NULL
+  int32 central_system_id = 4;                   // NOT NULL
+  google.protobuf.Timestamp started_at = 5;      // DEFAULT CURRENT_TIMESTAMP
+  google.protobuf.Timestamp ended_at = 6;        // может быть NULL
+}
+
+// Запрос для получения всех транзакций
+message GetAllTransactionsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+// Ответ со списком транзакций
+message GetAllTransactionsResponse {
+  repeated Transaction transactions = 1;
+}

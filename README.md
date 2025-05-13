@@ -42,6 +42,7 @@ replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 import (
     centralpb "ocpp_broker_protos.central_system.v1"
     mappingpb "ocpp_broker_protos.mapping.v1"
+    transactionpb "ocpp_broker_protos.transaction.v1"
 )
 ```
 
@@ -90,6 +91,33 @@ service MappingService {
   - weight (int32): Вес маппинга
   - is_master (bool): Флаг мастер-станции
   - is_enabled (bool): Флаг активности
+
+### TransactionService
+
+Сервис для управления транзакциями зарядных станций:
+
+```protobuf
+service TransactionService {
+  rpc GetAllTransactions(GetAllTransactionsRequest) returns (GetAllTransactionsResponse) {}
+}
+```
+
+#### Сообщения
+
+- Transaction:
+  - id (string): Уникальный идентификатор транзакции
+  - station_id (string): Идентификатор зарядной станции
+  - connector_id (string): Идентификатор коннектора
+  - central_system_id (int32): Идентификатор центральной системы
+  - started_at (google.protobuf.Timestamp): Время начала транзакции
+  - ended_at (google.protobuf.Timestamp): Время окончания транзакции (может быть null)
+
+- GetAllTransactionsRequest:
+  - limit (int32): Ограничение количества записей
+  - offset (int32): Смещение для пагинации
+
+- GetAllTransactionsResponse:
+  - transactions (repeated Transaction): Список транзакций
 
 ## Разработка
 
