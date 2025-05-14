@@ -41,6 +41,7 @@ replace github.com/minkovichvladimir/ocpp_broker_protos => ../ocpp_broker_protos
 ```go
 import (
     centralpb "ocpp_broker_protos.central_system.v1"
+    connectionpb "ocpp_broker_protos.connection.v1"
     mappingpb "ocpp_broker_protos.mapping.v1"
     transactionpb "ocpp_broker_protos.transaction.v1"
 )
@@ -50,25 +51,56 @@ import (
 
 ### CentralSystemService
 
-Сервис для взаимодействия с центральными системами:
+Сервис для управления центральными системами:
 
 ```protobuf
 service CentralSystemService {
-  rpc SendMessage (MessageRequest) returns (MessageResponse) {}
+  rpc CreateCentralSystem(CreateCentralSystemRequest) returns (CreateCentralSystemResponse) {}
+  rpc GetCentralSystem(GetCentralSystemRequest) returns (GetCentralSystemResponse) {}
+  rpc ListCentralSystems(ListCentralSystemsRequest) returns (ListCentralSystemsResponse) {}
+  rpc UpdateCentralSystem(UpdateCentralSystemRequest) returns (UpdateCentralSystemResponse) {}
+  rpc DeleteCentralSystem(DeleteCentralSystemRequest) returns (DeleteCentralSystemResponse) {}
 }
 ```
 
 #### Сообщения
 
-- MessageRequest:
-  - central_system_id (string): Идентификатор центральной системы
-  - message (bytes): Тело сообщения
-  - request_id (string): ID запроса для трейсинга
+- CentralSystem:
+  - id (int32): Идентификатор центральной системы
+  - name (string): Название центральной системы
+  - websocket_url (string): URL для WebSocket соединения
+  - description (string): Описание центральной системы
 
-- MessageResponse:
-  - success (bool): Статус обработки сообщения
-  - message (bytes): Ответное сообщение
-  - request_id (string): ID запроса для трейсинга
+- CreateCentralSystemRequest/Response, GetCentralSystemRequest/Response, UpdateCentralSystemRequest/Response, DeleteCentralSystemRequest/Response:
+  - Соответствующие запросы и ответы для операций CRUD
+
+### ConnectionService
+
+Сервис для управления соединениями станций с центральными системами:
+
+```protobuf
+service ConnectionService {
+  rpc ListWorkers(ListWorkersRequest) returns (ListWorkersResponse);
+  rpc GetWorker(GetWorkerRequest) returns (GetWorkerResponse);
+  rpc GetWorkerConnections(GetWorkerConnectionsRequest) returns (GetWorkerConnectionsResponse);
+  rpc CreateConnection(CreateConnectionRequest) returns (CreateConnectionResponse);
+  rpc RecreateConnection(RecreateConnectionRequest) returns (RecreateConnectionResponse);
+  rpc DisconnectStation(DisconnectStationRequest) returns (DisconnectStationResponse);
+}
+```
+
+#### Сообщения
+
+- WorkerInfo:
+  - central_system_id (uint32): Идентификатор центральной системы
+  - central_system_name (string): Название центральной системы
+  - connections_count (int32): Количество соединений
+  - connections (repeated ConnectionInfo): Список соединений
+
+- ConnectionInfo:
+  - station_id (string): Идентификатор зарядной станции
+  - central_system_id (uint32): Идентификатор центральной системы
+  - connected (bool): Статус соединения
 
 ### MappingService
 

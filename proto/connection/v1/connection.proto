@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package connection;
+
+option go_package = "ocpp_broker_protos.connection.v1;connectionv1";
+
+// Сервис для управления соединениями
+service ConnectionService {
+  // Получение списка всех воркеров
+  rpc ListWorkers(ListWorkersRequest) returns (ListWorkersResponse);
+
+  // Получение информации о конкретном воркере
+  rpc GetWorker(GetWorkerRequest) returns (GetWorkerResponse);
+
+  // Получение списка соединений для конкретного воркера
+  rpc GetWorkerConnections(GetWorkerConnectionsRequest) returns (GetWorkerConnectionsResponse);
+
+  // Создание нового соединения
+  rpc CreateConnection(CreateConnectionRequest) returns (CreateConnectionResponse);
+
+  // Пересоздание соединения
+  rpc RecreateConnection(RecreateConnectionRequest) returns (RecreateConnectionResponse);
+
+  // Отключение станции
+  rpc DisconnectStation(DisconnectStationRequest) returns (DisconnectStationResponse);
+}
+
+// Информация о соединении станции
+message ConnectionInfo {
+  string station_id = 1;
+  uint32 central_system_id = 2;
+  bool connected = 3;
+}
+
+// Информация о воркере
+message WorkerInfo {
+  uint32 central_system_id = 1;
+  string central_system_name = 2;
+  int32 connections_count = 3;
+  repeated ConnectionInfo connections = 4;
+}
+
+// Запрос на получение списка воркеров
+message ListWorkersRequest {}
+
+// Ответ со списком воркеров
+message ListWorkersResponse {
+  repeated WorkerInfo workers = 1;
+}
+
+// Запрос на получение информации о воркере
+message GetWorkerRequest {
+  uint32 central_system_id = 1;
+}
+
+// Ответ с информацией о воркере
+message GetWorkerResponse {
+  WorkerInfo worker = 1;
+}
+
+// Запрос на получение соединений воркера
+message GetWorkerConnectionsRequest {
+  uint32 central_system_id = 1;
+}
+
+// Ответ со списком соединений воркера
+message GetWorkerConnectionsResponse {
+  repeated ConnectionInfo connections = 1;
+}
+
+// Запрос на создание соединения
+message CreateConnectionRequest {
+  uint32 central_system_id = 1;
+  string station_id = 2;
+}
+
+// Ответ на создание соединения
+message CreateConnectionResponse {}
+
+// Запрос на пересоздание соединения
+message RecreateConnectionRequest {
+  uint32 central_system_id = 1;
+  string station_id = 2;
+}
+
+// Ответ на пересоздание соединения
+message RecreateConnectionResponse {}
+
+// Запрос на отключение станции
+message DisconnectStationRequest {
+  uint32 central_system_id = 1;
+  string station_id = 2;
+}
+
+// Ответ на отключение станции
+message DisconnectStationResponse {}
